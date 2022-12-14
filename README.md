@@ -4,25 +4,24 @@
 #Goal: Use VBA Scripting to automate the analysis for large quantities of stock market data:
 
 #Analysis Performed:
-
-       * Unique tickers
-       * Percent changes
-       * Yearly changes
-       * Greatest % increase
-       * Greatest % decrease
-       * Greatest total volume
-       * Conditional formatting 
+ * Unique tickers
+ * Percent changes
+ * Yearly changes
+ * Greatest % increase
+ * Greatest % decrease
+ * Greatest total volume
+ * Conditional formatting 
 
 #Techniques Utilized:
       
-       * Cell.Value
-       * Range.Value
-       * Nested For Loops
-       * Loop through all worksheets
-       * If/Elseif/Then statements
-       * NumberFormat and Autofit
-       * Min/Max
-       * conditional formatting with if statements
+ * Cell.Value
+ * Range.Value
+ * Nested For Loops
+ * Loop through all worksheets
+ * If/Elseif/Then statements
+ * NumberFormat and Autofit
+ * Min/Max
+ * conditional formatting with if statements
  
 #Results
 
