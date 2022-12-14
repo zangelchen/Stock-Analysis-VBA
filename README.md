@@ -34,6 +34,5 @@
 
 #Ideas for Additional Analysis:
 
-#can combine all the data across the worksheets to create a single dashboard that shows the unique tickers, their yearly change and percentage change. Then can create a scatterplot to see the distribution and compare the stock tickers with each other. 
-
-#categorize each stock according to its industry then perform market research on the macro/micro economic events happened during        the year that affected the stock performances. 
+* can combine  the data across all worksheets and create a scatterplot to visualize the distribution 
+* analyze stock performance by categorizing each stock by industry then perform market research on the economic events for that year
