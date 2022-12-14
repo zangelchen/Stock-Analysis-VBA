@@ -4,7 +4,8 @@
 #Goal: Use VBA Scripting to automate the analysis for large quantities of stock market data:
 
 #Analysis Performed:
-       *Unique tickers
+
+       * Unique tickers
        * Percent changes
        * Yearly changes
        * Greatest % increase
@@ -31,8 +32,8 @@
 
 ![Screenshot 2022-12-14 at 10 08 32 AM](https://user-images.githubusercontent.com/117549284/207664073-436f8b9d-8150-4290-8f4c-5af124c7753c.png)
 
-#Ideas for Additional Analysis: 
-       
-# can combine all the data across the worksheets to create a single dashboard that shows the unique tickers, their yearly change          and percentage change. Then can create a scatterplot to see the distribution and compare the stock tickers with each other. 
+#Ideas for Additional Analysis:
 
-# categorize each stock according to its industry then perform market research on the macro/micro economic events happened during        the year that affected the stock performances. 
+#can combine all the data across the worksheets to create a single dashboard that shows the unique tickers, their yearly change and percentage change. Then can create a scatterplot to see the distribution and compare the stock tickers with each other. 
+
+#categorize each stock according to its industry then perform market research on the macro/micro economic events happened during        the year that affected the stock performances. 
