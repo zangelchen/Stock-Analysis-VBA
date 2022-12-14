@@ -1,0 +1,132 @@
+Sub StockAnalysis()
+
+Dim ws As Worksheet
+
+For Each ws In Worksheets
+   
+'find the last row
+ LastRow = Cells(Rows.Count, 1).End(xlUp).Row
+
+'add the headers for the calculated fields
+ ws.Cells(1, 9).Value = "Ticker"
+ ws.Cells(1, 10).Value = "YearlyChange"
+ ws.Cells(1, 11).Value = "PercentChange"
+ ws.Cells(1, 12).Value = "Total Volume"
+
+'start the functions to find the unique tickers and their YearlyChange, PercentChange, TotalVolume
+
+'find the YearlyChange and PercentChange
+  counter = 2
+       For i = 2 To LastRow
+
+       'find the value at beginning of the year for the unique ticker
+       If ws.Cells(i - 1, 1).Value <> ws.Cells(i, 1).Value Then
+       FirstValue = ws.Cells(i, 3).Value
+       End If
+
+      'find the value at end of the year value for the unique ticker
+       If ws.Cells(i + 1, 1).Value <> ws.Cells(i, 1).Value Then
+       EndValue = ws.Cells(i, 6).Value
+
+       'populate column i with each unique tickers
+       ws.Cells(counter, 9).Value = ws.Cells(i, 1).Value
+
+       'populate column j with the yearly change for each unique ticker
+       ws.Cells(counter, 10).Value = EndValue - FirstValue
+
+       'populate column j with the percentage change for each unique ticker
+       ws.Cells(counter, 11).Value = FormatPercent((EndValue - FirstValue) / EndValue)
+       Columns("K").NumberFormat = "0.0%"
+
+       'populate column
+       counter = counter + 1
+
+
+
+      End If
+   Next i
+
+
+'find TotalVolume
+
+Dim TotalVolume As Double
+    TotalVolume = 0
+
+ rowcounter = 2
+
+ For v = 2 To LastRow
+    If ws.Cells(v + 1, 1).Value <> ws.Cells(v, 1).Value Then
+       TotalVolume = TotalVolume + ws.Cells(v, 7).Value
+       ws.Cells(rowcounter, 12).Value = TotalVolume
+       TotalVolume = 0
+       
+       rowcounter = rowcounter + 1
+
+    Else
+    TotalVolume = TotalVolume + ws.Cells(v, 7).Value
+
+    End If
+
+  Next v
+
+'color code the YearlyChange
+ For x = 2 To LastRow
+
+    If IsEmpty(ws.Cells(x, 10).Value) = True Then
+       ws.Cells(x, 10).Interior.Color = vbWhite
+
+    ElseIf ws.Cells(x, 10).Value >= 0 Then
+       ws.Cells(x, 10).Interior.Color = vbGreen
+
+    ElseIf ws.Cells(x, 10).Value < 0 Then
+       ws.Cells(x, 10).Interior.Color = vbRed
+
+    End If
+  Next x
+
+'find the greatest % increase/decrease and greatest total volume
+
+'add the column and row titles
+ ws.Cells(2, 14).Value = "Greatest % Increase"
+ ws.Cells(3, 14).Value = "Greatest % decrease"
+ ws.Cells(4, 14).Value = "Greatest Total Volume"
+ ws.Cells(1, 15).Value = "Ticker"
+ ws.Cells(1, 16).Value = "Value"
+
+'find the greatest % increase/decrease and greatest total volume
+'return the value into the corresponding cell
+ Dim MaxPer, MinPer, MaxVol As String
+    MaxPer = Application.WorksheetFunction.Max(ws.Range(ws.Cells(2, 11), ws.Cells(LastRow, 11)))
+    ws.Cells(2, 15).Value = MaxPer
+
+    MinPer = Application.WorksheetFunction.Min(ws.Range(ws.Cells(2, 11), ws.Cells(LastRow, 11)))
+    ws.Cells(3, 15).Value = MinPer
+
+    MaxVol = Application.WorksheetFunction.Max(ws.Range(ws.Cells(2, 12), ws.Cells(LastRow, 12)))
+    ws.Cells(4, 15).Value = MaxVol
+
+'loop to pull in the corresponding ticker next to the greatest % increase/decrease and greatest total volume
+    For a = 2 To LastRow
+       If ws.Cells(a, 11).Value = MaxPer Then
+       ws.Cells(2, 16).Value = ws.Cells(a, 9).Value
+       End If
+
+       If ws.Cells(a, 11).Value = MinPer Then
+       ws.Cells(3, 16).Value = ws.Cells(a, 9).Value
+       End If
+
+       If ws.Cells(a, 12).Value = MaxVol Then
+       ws.Cells(4, 16).Value = ws.Cells(a, 9).Value
+       End If
+    Next a
+
+    'format the table
+    ws.Cells(2, 15).NumberFormat = "0.0%"
+    ws.Cells(3, 15).NumberFormat = "0.0%"
+
+    ws.Columns("A:P").AutoFit
+ Next ws
+ 
+End Sub
+
+
